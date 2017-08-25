@@ -2,6 +2,7 @@ package utils;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
@@ -14,7 +15,7 @@ import org.testng.TestListenerAdapter;
  * @Date 2017/8/25 0025
  */
 public class TestListener extends TestListenerAdapter {
-    public static Logger logger= LogManager.getLogger(TestListener.class);
+    public  Logger logger= LogManager.getLogger(this.getClass());
     ExtentReports extent;
     ExtentTest extentTest;
 
@@ -30,7 +31,7 @@ public class TestListener extends TestListenerAdapter {
     public void onTestFailure(ITestResult tr) {
         super.onTestFailure(tr);
         logger.info("【" +tr.getMethod().getDescription() + " Failure】");
-        //extentTest.log(LogStatus.FAIL, tr.getThrowable());
+        extentTest.log(LogStatus.FAIL, tr.getThrowable());
         extent.endTest(extentTest);
 
     }
@@ -39,7 +40,7 @@ public class TestListener extends TestListenerAdapter {
     public void onTestSkipped(ITestResult tr) {
         super.onTestSkipped(tr);
         logger.info("【" + tr.getMethod().getDescription() + " Skipped】");
-        //extentTest.log(LogStatus.SKIP, "SKIP");
+        extentTest.log(LogStatus.SKIP, "SKIP");
         extent.endTest(extentTest);
     }
 
@@ -47,8 +48,8 @@ public class TestListener extends TestListenerAdapter {
     public void onTestSuccess(ITestResult tr) {
         super.onTestSuccess(tr);
         logger.info("【" + tr.getMethod().getDescription() + " Success】");
-        //extentTest.log(LogStatus.PASS, "Pass");
-        //extent=TestBaseCase.getextent();
+        extentTest.log(LogStatus.SKIP, "PASS+");
+        logger.info("参数:"+tr.getParameters());
         extent.endTest(extentTest);
     }
 
