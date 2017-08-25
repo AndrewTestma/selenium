@@ -8,6 +8,7 @@ import utils.TestBaseCase;
 public class HelloTest extends TestBaseCase{
     @Test
     public void test(){
+        extentTest=extentReports.startTest("测试");
         String a="1";
         String b="1";
         Assertion.Veritytest(a,b);

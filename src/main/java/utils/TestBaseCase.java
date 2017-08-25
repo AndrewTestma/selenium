@@ -18,6 +18,7 @@ public class TestBaseCase {
     public static ExtentTest extentTest;
     public static String reportLocation="ExtentReport.html";
     public  Logger log=LogManager.getLogger(this.getClass().getName());
+
     @BeforeSuite
     public void initializationExtentReport(){
         /*initialization ExtentReport*/
@@ -52,4 +53,8 @@ public class TestBaseCase {
         extentReports.flush();
         extentReports.close();
     }
+    public static ExtentReports getextent() {
+        return extentReports;
+    }
+
 }
