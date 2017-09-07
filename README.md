@@ -5,7 +5,8 @@
 
 - 自定义##Testng监听器##:TestListenerAdapter
   继承TestListenerAdapter类，重写onTestStart，onTestFailure，onTestSkipped，onTestSuccess，onFinish方法
-  ```
+  
+  ```
     @Override
     public void onTestStart(ITestResult tr) {
         super.onTestStart(tr);
