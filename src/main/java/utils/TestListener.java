@@ -15,7 +15,7 @@ import org.testng.TestListenerAdapter;
  * @Date 2017/8/25 0025
  */
 public class TestListener extends TestListenerAdapter {
-    public  Logger logger= LogManager.getLogger(this.getClass());
+    public  Logger logger= LogManager.getLogger(this.getClass().getName());
     ExtentReports extent;
     ExtentTest extentTest;
 
@@ -48,9 +48,9 @@ public class TestListener extends TestListenerAdapter {
     public void onTestSuccess(ITestResult tr) {
         super.onTestSuccess(tr);
         logger.info("【" + tr.getMethod().getDescription() + " Success】");
-        extentTest.log(LogStatus.SKIP, "PASS+");
-        logger.info("参数:"+tr.getParameters());
+        //logger.info("参数:"+tr.getParameters()[0]);
         extent.endTest(extentTest);
+        extent.flush();
     }
 
     @Override
