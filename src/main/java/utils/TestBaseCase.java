@@ -3,18 +3,12 @@ package utils;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import com.relevantcodes.extentreports.NetworkMode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.message.Message;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
-import org.testng.TestListenerAdapter;
-import org.testng.TestNG;
 import org.testng.annotations.*;
-
-import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2017/8/25 0025.
@@ -54,7 +48,8 @@ public class TestBaseCase {
             if(result.getParameters().length>0) {
                 extentTest.log(LogStatus.PASS, "参数:" + result.getParameters()[0]);
             }
-            extentTest.log(LogStatus.FAIL,extentTest.addScreenCapture("./extentreport-images/20170907174058.jpg"),result.getThrowable());
+            //extentTest.log(LogStatus.FAIL,result.getThrowable());
+            extentTest.log(LogStatus.FAIL,extentTest.addBase64ScreenShot(Assertion.screenShotPath),result.getThrowable());
         }else if(result.getStatus()==ITestResult.SKIP){
             if(result.getParameters().length>0) {
                 extentTest.log(LogStatus.PASS, "参数:" + result.getParameters()[0]);
@@ -64,11 +59,10 @@ public class TestBaseCase {
             if(result.getParameters().length>0) {
                 extentTest.log(LogStatus.PASS, "参数:" + result.getParameters()[0]);
             }
-            extentTest.log(LogStatus.PASS,"成功",extentTest.addScreenCapture("./extentreport-images/20170907174058.jpg"));
+            extentTest.log(LogStatus.PASS,"成功",extentTest.addBase64ScreenShot(Assertion.screenShotPath));
         }
         extentReports.endTest(extentTest);
         extentReports.flush();
-        log.getMessageFactory();
     }
     @AfterSuite
     public void closeExtentReport(){
