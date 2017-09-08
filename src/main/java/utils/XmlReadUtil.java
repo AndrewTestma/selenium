@@ -76,7 +76,9 @@ public class XmlReadUtil {
         }
         return locatorHashMap;
     }
-
+    /**
+     * By.Type
+     * */
     public static ByType getByType(String type) {
         ByType byType = ByType.xpath;
         if (type == null || type.equalsIgnoreCase("xpath")) {
