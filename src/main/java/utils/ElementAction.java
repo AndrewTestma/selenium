@@ -192,7 +192,7 @@ public class ElementAction extends TestBaseCase {
             webElement.sendKeys(value);
             log.info(locator.getLocalorName()+"输入: "+value);
         }catch(Exception e){
-            log.error("找不到元素："+locator.getLocalorName()+"-->点击失败");
+            log.error("找不到元素："+locator.getLocalorName());
         }
     }
 }
