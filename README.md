@@ -16,5 +16,5 @@
 extentReports=new ExtentReports(reportLocation,true);
 extentReports.addSystemInfo("Author","Andrew");
 ```
-reportLocation是测试报告的地址，在这里用的根目录,##reportLocation=ExetentReport.Html##
+reportLocation是测试报告的地址，在这里用的根目录,reportLocation=ExetentReport.Html
 true 表示每次都重写报告。
