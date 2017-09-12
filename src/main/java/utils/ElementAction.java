@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
 
-import utils.Locator.ByType;
 /**
  * @Author:Andrew
  * @Description:
@@ -65,7 +64,6 @@ public class ElementAction extends TestBaseCase {
         try{
             webElement=(new WebDriverWait(driver,10).until(
                     new ExpectedCondition<List<WebElement>>() {
-                        @Override
                         public List<WebElement> apply(WebDriver input) {
                             List<WebElement> element=null;
                             int k=0;
@@ -182,7 +180,19 @@ public class ElementAction extends TestBaseCase {
             log.info("点击："+locator.getLocalorName()+"-->点击成功");
         }catch (NoSuchElementException e){
             log.error("找不到元素："+locator.getLocalorName()+"-->点击失败");
-            e.printStackTrace();
+        }
+    }
+    /**
+     * 输入参数
+     * */
+    public void sendKey(Locator locator,String value){
+        WebElement webElement=null;
+        try{
+            webElement=findElement(locator);
+            webElement.sendKeys(value);
+            log.info(locator.getLocalorName()+"输入: "+value);
+        }catch(Exception e){
+            log.error("找不到元素："+locator.getLocalorName()+"-->点击失败");
         }
     }
 }
