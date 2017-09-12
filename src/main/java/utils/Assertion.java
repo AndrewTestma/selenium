@@ -1,5 +1,6 @@
 package utils;
-import org.openqa.selenium.TimeoutException;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import utils.Locator.ByType;
 import org.apache.logging.log4j.LogManager;
@@ -9,12 +10,15 @@ import org.openqa.selenium.By;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.NoSuchElementException;
 
 /**
- * Created by Administrator on 2017/8/25 0025.
+ * Created by Administrator on 2017/8/25 0025
  */
 public class Assertion extends TestBaseCase{
+    public static ExtentTest verification=extentReports.startTest("验证点");
+    public static ExtentTest parameter=extentReports.startTest("参数");
+    public static ExtentTest screenshot=extentReports.startTest("截图");
+    //public static  ExtentTest errorLog=extentReports.startTest("错误信息");
     public static String screenShotPath;
     public static String formatDate(Date date)
     {
@@ -33,7 +37,7 @@ public class Assertion extends TestBaseCase{
      * @param--exceptStr 预期值
      * @param--message 验证中文描述
      * */
-    public static void  verityTextPresentPrecision(String exceptStr,String message){
+    public static void  verityTextPresentPrecision(String exceptStr,String message,String parameterStr){
         String verityStr="【Assert验证】："+"页面是否存在【"+exceptStr+"】字符串";
         log.info(verityStr);
         Boolean flag;
@@ -46,9 +50,9 @@ public class Assertion extends TestBaseCase{
         }
         try{
             Assert.assertTrue(flag);
-            AssertPassLog();
+            AssertPassLog(verityStr,parameterStr);
         }catch(Error f){
-            AssertFailedLog();
+            AssertFailedLog(verityStr,parameterStr);
         }
     }
     /**
@@ -56,8 +60,9 @@ public class Assertion extends TestBaseCase{
      * @param exceptStr  预期值
      * @param Message 验证中文描述
      * @param frame 查找文本所在frame
+     * @param parameterStr 测试数据
      * */
-    public static  void verityTextPresentPrecision(String exceptStr,String frame,String Message)
+    public static  void verityTextPresentPrecision(String exceptStr,String frame,String Message,String parameterStr)
     {
         ElementAction action=new ElementAction();
         String except="//*[text()='"+exceptStr+"']";
@@ -73,17 +78,32 @@ public class Assertion extends TestBaseCase{
         }
         try {
             Assert.assertTrue(flag);
-            AssertPassLog();
+            AssertPassLog(verityStr,parameterStr);
         } catch (Error f) {
-            AssertFailedLog();
             Assertion.snapshotInfo();
+            AssertFailedLog(verityStr,parameterStr);
         }
     }
 
-    public static void AssertPassLog(){
+    public static void AssertPassLog(String verityStr,String parameterStr){
         log.info("【Assert验证  pass!】");
+        parameter.log(LogStatus.INFO,"测试数据"+parameterStr,"常规建站数据");
+        extentTest.appendChild(parameter);
+        extentReports.flush();
+        verification.log(LogStatus.PASS,verityStr,"PASS");
+        extentTest.appendChild(verification);
+        extentReports.flush();
     }
-    public static void AssertFailedLog(){
+    public static void AssertFailedLog(String verityStr,String parameterStr){
         log.error("【Assert验证  failed!】");
+        parameter.log(LogStatus.INFO,"测试数据"+parameterStr,"常规建站数据");
+        extentTest.appendChild(parameter);
+        extentReports.flush();
+        verification.log(LogStatus.FAIL,verityStr,"FAILED");
+        extentTest.appendChild(verification);
+        extentReports.flush();
+        screenshot.log(LogStatus.FAIL,screenshot.addBase64ScreenShot(screenShotPath));
+        extentTest.appendChild(screenshot);
+        extentReports.flush();
     }
 }
