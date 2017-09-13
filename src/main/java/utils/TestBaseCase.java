@@ -18,7 +18,7 @@ public class TestBaseCase {
     public static ExtentReports extentReports;
     public static ExtentTest extentTest;
     public static String reportLocation="ExtentReport.html";
-    public static StringBuffer sb=new StringBuffer();
+    public static int types;
     public  Logger log=LogManager.getLogger(this.getClass().getName());
 
     @BeforeSuite
@@ -28,15 +28,17 @@ public class TestBaseCase {
         extentReports
                 .addSystemInfo("Author","Andrew");
     }
-    @BeforeClass
-    public void startSetup(){
+    @BeforeTest
+    @Parameters({"type"})
+    public void startSetup(int type){
         /*initialization WebDriver*/
         log.entry();
         log.info("【开始执行测试】");
+        this.types=type;
         System.setProperty("webdriver.chrome.driver","./src/main/resources/driver/Chromedriver.exe");
         driver=new ChromeDriver();
     }
-    @AfterClass
+    @AfterTest
     public void endStart(){
         log.exit();
         driver.close();
