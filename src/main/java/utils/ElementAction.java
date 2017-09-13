@@ -205,12 +205,30 @@ public class ElementAction extends TestBaseCase {
     }
     /**
      * 输入测试数据
+     * @param locator 元素对象
+     * @param value 测试数据
      * */
     public void sendKey(Locator locator,String value){
         WebElement webElement=null;
         try{
             webElement=findElement(locator);
             webElement.sendKeys(value);
+            log.info(locator.getLocalorName()+"输入: "+value);
+        }catch(Exception e){
+            log.error("找不到元素："+locator.getLocalorName());
+        }
+    }
+    /**
+     * 处理蛋疼的复制粘贴元素输入
+     * @param locator 测试对象
+     * @param i 元素下标
+     * @param value 测试数据
+     * */
+    public void sendKey(Locator locator,int i,String value){
+        List<WebElement> webElements=null;
+        try{
+            webElements=findElements(locator);
+            webElements.get(i).sendKeys(value);
             log.info(locator.getLocalorName()+"输入: "+value);
         }catch(Exception e){
             log.error("找不到元素："+locator.getLocalorName());
