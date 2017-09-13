@@ -20,6 +20,7 @@ public class Assertion extends TestBaseCase{
     public static ExtentTest screenshot;
     //public static  ExtentTest errorLog=extentReports.startTest("错误信息");
     public static String screenShotPath;
+    public static int i=0;
     public static String formatDate(Date date)
     {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HHmmssSSS");
@@ -58,8 +59,8 @@ public class Assertion extends TestBaseCase{
     /**
      * 验证页面是否存在某字符
      * @param exceptStr  预期值
-     * @param Message 验证中文描述
      * @param frame 查找文本所在frame
+     * @param Message 验证中文描述
      * @param parameterStr 测试数据
      * */
     public static  void verityTextPresentPrecision(String exceptStr,String frame,String Message,String parameterStr)
@@ -84,27 +85,43 @@ public class Assertion extends TestBaseCase{
             AssertFailedLog(verityStr,parameterStr);
         }
     }
-
+    /**
+     * 验证成功
+     * @param verityStr 验证信息
+     * @param parameterStr 测试数据
+     * */
     public static void AssertPassLog(String verityStr,String parameterStr){
         log.info("【Assert验证  pass!】");
-        parameter.log(LogStatus.INFO,parameterStr,"正常建站数据");
-        extentTest.appendChild(parameter);
-        extentReports.flush();
-        verification.log(LogStatus.PASS,verityStr,"PASS");
-        extentTest.appendChild(verification);
-        extentReports.flush();
+         writeExtentReport(verityStr,parameterStr,"PASS");
     }
+    /**
+     * 验证失败
+     * @param verityStr 验证信息
+     * @param parameterStr 测试数据
+     * */
     public static void AssertFailedLog(String verityStr,String parameterStr){
-        screenshot=extentReports.startTest("截图");
         log.error("【Assert验证  failed!】");
+        writeExtentReport(verityStr,parameterStr,"FAILED");
+    }
+    /**
+     * @将验证结果及测试数据写入测试报告中
+     * @param status 验证状态
+     * */
+    public static void writeExtentReport(String verityStr,String parameterStr,String status){
         parameter.log(LogStatus.INFO,parameterStr,"正常建站数据");
-        extentTest.appendChild(parameter);
-        extentReports.flush();
-        verification.log(LogStatus.FAIL,verityStr,"FAILED");
-        extentTest.appendChild(verification);
-        extentReports.flush();
-        screenshot.log(LogStatus.FAIL,screenshot.addBase64ScreenShot(screenShotPath));
-        extentTest.appendChild(screenshot);
-        extentReports.flush();
+        if(status.equals("PASS")){
+            verification.log(LogStatus.PASS,verityStr,"PASS");
+        }else{
+            verification.log(LogStatus.FAIL,verityStr,"FAILED");
+            screenshot=extentReports.startTest("截图");
+            screenshot.log(LogStatus.FAIL,screenshot.addBase64ScreenShot(screenShotPath));
+            extentTest.appendChild(screenshot);
+        }
+        if(i==0){
+            extentTest.appendChild(parameter);
+            extentTest.appendChild(verification);
+            extentReports.flush();
+            i++;
+        }
     }
 }
