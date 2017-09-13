@@ -97,7 +97,7 @@ public class Assertion extends TestBaseCase{
     public static void AssertFailedLog(String verityStr,String parameterStr){
         screenshot=extentReports.startTest("截图");
         log.error("【Assert验证  failed!】");
-        parameter.log(LogStatus.INFO,"测试数据"+parameterStr,"正常建站数据");
+        parameter.log(LogStatus.INFO,parameterStr,"正常建站数据");
         extentTest.appendChild(parameter);
         extentReports.flush();
         verification.log(LogStatus.FAIL,verityStr,"FAILED");

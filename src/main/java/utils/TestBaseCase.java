@@ -45,20 +45,10 @@ public class TestBaseCase {
     @AfterMethod
     public void ExtentResult(ITestResult result){
         if(result.getStatus()==ITestResult.FAILURE){
-            if(result.getParameters().length>0) {
-                extentTest.log(LogStatus.PASS, "参数:" + result.getParameters()[0]);
-            }
-            //extentTest.log(LogStatus.FAIL,result.getThrowable());
             extentTest.log(LogStatus.FAIL,extentTest.addBase64ScreenShot(Assertion.screenShotPath),result.getThrowable());
         }else if(result.getStatus()==ITestResult.SKIP){
-            if(result.getParameters().length>0) {
-                extentTest.log(LogStatus.PASS, "参数:" + result.getParameters()[0]);
-            }
             extentTest.log(LogStatus.SKIP,result.getThrowable());
         }else{
-            if(result.getParameters().length>0) {
-                extentTest.log(LogStatus.PASS, "参数:" + result.getParameters()[0]);
-            }
             extentTest.log(LogStatus.PASS,"成功");
         }
         extentReports.endTest(extentTest);
