@@ -183,7 +183,28 @@ public class ElementAction extends TestBaseCase {
         }
     }
     /**
-     * 输入参数
+     * 点击一组元素中的某一个
+     * @param locator 元素对象
+     * @param attributesName 元素属性名称
+     * @param attributesValue 元素属性值
+     * */
+    public void clicks(Locator locator,String attributesName,String  attributesValue ){
+        List<WebElement>webElements=null;
+        try {
+            webElements=findElements(locator);
+            for(WebElement element:webElements){
+                if(element.getAttribute(attributesName).equals(attributesValue)){
+                    element.click();
+                    log.info("点击："+locator.getLocalorName()+"-->点击成功");
+                    break;
+                }
+            }
+        }catch(Exception e){
+            log.error("找不到元素："+locator.getLocalorName()+"-->点击失败");
+        }
+    }
+    /**
+     * 输入测试数据
      * */
     public void sendKey(Locator locator,String value){
         WebElement webElement=null;
