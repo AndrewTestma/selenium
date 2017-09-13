@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map>
+    <page pagename="pageObject.LoginPage" value="" desc="登录" >
+        <!-- 系统登录 -->
+        <location type="id" value="vsblogintype1" desc="系统管理" frame="">systemLogin</location>
+        <location type="id"  value="user" desc="用户名" frame="">user</location>
+        <location type="id"  value="password_temp" desc="密码输入框" frame="">password</location>
+        <location type="cssSelector"  value="input[type='image']" desc="登录按钮" frame="">submit</location>
+        <!-- 创建网站 -->
+        <location type="cssSelector"  value="input[value='新增网站']" desc="新增网站" frame="mainframe/main/right">addWebSite</location>
+        <location type="name"  value="firmname" desc="网站名称" frame="mainframe/main/right">webSiteName</location>
+        <location type="name"  value="account" desc="网站账号" frame="mainframe/main/right">webSiteAccount</location>
+        <location type="id"  value="firmtype0" desc="网站类型" frame="mainframe/main/right">webSitebType</location>
+        <location type="id"  value="virhostdomian" desc="虚拟域名" frame="mainframe/main/right">virhostdomianTxt</location>
+        <location type="cssSelector"  value="input[value='选择']" desc="选择用户按钮" frame="mainframe/main/right">selectUserBtn</location>
+        <location type="cssSelector"  value="input[username='handi']" desc="选择用户" frame="iframe_obj_1003">UserRadio</location>
+        <location type="cssSelector"  value="input[value='确定']" desc="确定按钮" frame="iframe_obj_1003">commitBtn</location>
+        <location type="cssSelector"  value="input[value='确定']" desc="确定按钮" frame="mainframe/main/right">commitBtn1</location>
+    </page>
+</map>
