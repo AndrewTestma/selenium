@@ -16,8 +16,8 @@ import java.util.Date;
  */
 public class Assertion extends TestBaseCase{
     public static ExtentTest verification=extentReports.startTest("验证点");
-    public static ExtentTest parameter=extentReports.startTest("参数");
-    public static ExtentTest screenshot=extentReports.startTest("截图");
+    public static ExtentTest  parameter=extentReports.startTest("参数");
+    public static ExtentTest screenshot;
     //public static  ExtentTest errorLog=extentReports.startTest("错误信息");
     public static String screenShotPath;
     public static String formatDate(Date date)
@@ -87,7 +87,7 @@ public class Assertion extends TestBaseCase{
 
     public static void AssertPassLog(String verityStr,String parameterStr){
         log.info("【Assert验证  pass!】");
-        parameter.log(LogStatus.INFO,"测试数据"+parameterStr,"常规建站数据");
+        parameter.log(LogStatus.INFO,parameterStr,"正常建站数据");
         extentTest.appendChild(parameter);
         extentReports.flush();
         verification.log(LogStatus.PASS,verityStr,"PASS");
@@ -95,8 +95,9 @@ public class Assertion extends TestBaseCase{
         extentReports.flush();
     }
     public static void AssertFailedLog(String verityStr,String parameterStr){
+        screenshot=extentReports.startTest("截图");
         log.error("【Assert验证  failed!】");
-        parameter.log(LogStatus.INFO,"测试数据"+parameterStr,"常规建站数据");
+        parameter.log(LogStatus.INFO,"测试数据"+parameterStr,"正常建站数据");
         extentTest.appendChild(parameter);
         extentReports.flush();
         verification.log(LogStatus.FAIL,verityStr,"FAILED");
