@@ -44,13 +44,13 @@ public class PageObjectAutoCode {
             //获取对象库包名
             //String packageName=pageNameArray[0].toString();
             //--自动编写对象库代码（XXPage.java）开始--
-            StringBuffer sb=new StringBuffer("package pmsObject;\n");
+            StringBuffer sb=new StringBuffer("package pageObject;\n");
             sb.append("import java.io.IOException;\n");
-            sb.append("import Utils.BaseAction;\n");
-            sb.append("import Utils.Locator;\n");
+            sb.append("import utils.BaseAction;\n");
+            sb.append("import utils.Locator;\n");
             sb.append("public class "+ pageClassName+" extends BaseAction {\n");
             sb.append("//用于eclipse工程内运行查找对象库文件路径\n");
-            sb.append("private String path=\"ElementXML/pms/"+xml+"\";\n");
+            sb.append("private String path=\"ElementXML/"+xml+"\";\n");
             //sb.append("//用户打包成jar后查找对象库文件路径\n");
             //sb.append("private InputStream pathInputStream=PageObjectAutoCode.class.getClassLoader().getResourceAsStream(\"net/hk515/pageObjectConfig/UILibrary.xml\");	\n");
             sb.append(" public   "
@@ -58,7 +58,7 @@ public class PageObjectAutoCode {
                     + "() {\n");
             sb.append("//工程内读取对象库文件\n	");
             sb.append("     setXmlObjectPath(path);\n");
-            sb.append("     getLocatorMap();");
+            sb.append("     getLocatorHashMap();");
             sb.append("\n}");
             //sb.append("\n private String path=PageObjectAutoCode.class.getClassLoader().getResource(\"net/hk515/pageObjectConfig/UILibrary.xml\").getPath();");
             //遍历Page节点下的Locator节点
@@ -69,7 +69,7 @@ public class PageObjectAutoCode {
                 String locatorName=locator.getTextTrim();
                 if(locator.attributeCount()>3)
                 {sb.append("\n/***\n"
-                        + "* "+locator.attribute(3).getValue()+"\n"
+                        + "* "+locator.attribute(2).getValue()+"\n"
                         + "* @return\n"
                         + "* @throws IOException\n"
                         + "*/\n");
