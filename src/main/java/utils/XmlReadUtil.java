@@ -36,7 +36,6 @@ public class XmlReadUtil {
             for(Iterator<?> i = root.elementIterator();i.hasNext();){
                 Element page=(Element)i.next();
                 if(page.attribute(0).getValue().equalsIgnoreCase(pageName)){
-                    log.info("读取页面"+pageName+"成功");
                     for(Iterator<?>l=page.elementIterator();l.hasNext();){
                         String type=null;
                         String value=null;
@@ -44,7 +43,6 @@ public class XmlReadUtil {
                         String frame=null;
                         String locatorName=null;
                         Element locator=(Element)l.next();
-                        log.info("开始读取"+locatorName+"定位信息");
                         locatorName=locator.getText();
                         for(Iterator<?>j=locator.attributeIterator();j.hasNext();){
                             Attribute attribute=(Attribute)j.next();
@@ -63,7 +61,6 @@ public class XmlReadUtil {
                             {
                                 frame=attribute.getValue();
                             }
-                            log.info(locatorName+"元素信息："+"定位方式："+type+" 定位值："+value+" 所在frame："+frame);
                         }
                         Locator temp = new Locator(value.trim(), getByType(type),desc.trim(),frame.trim(),locatorName.trim());
                         locatorHashMap.put(locatorName.trim(),temp);

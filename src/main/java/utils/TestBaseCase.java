@@ -59,7 +59,7 @@ public class TestBaseCase {
             if(result.getParameters().length>0) {
                 extentTest.log(LogStatus.PASS, "参数:" + result.getParameters()[0]);
             }
-            extentTest.log(LogStatus.PASS,"成功",extentTest.addBase64ScreenShot(Assertion.screenShotPath));
+            extentTest.log(LogStatus.PASS,"成功");
         }
         extentReports.endTest(extentTest);
         extentReports.flush();
