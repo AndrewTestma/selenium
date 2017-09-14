@@ -26,7 +26,7 @@ public class ElementAction extends TestBaseCase {
     public WebElement findElement(final Locator locator){
         WebElement webElement = null;
         try{
-                webElement=(new WebDriverWait(driver,3).until(
+                webElement=(new WebDriverWait(driver,10).until(
                         new ExpectedCondition<WebElement>() {
                             public WebElement apply(WebDriver input) {
                                 WebElement element=null;
@@ -232,6 +232,16 @@ public class ElementAction extends TestBaseCase {
             log.info(locator.getLocalorName()+"输入: "+value);
         }catch(Exception e){
             log.error("找不到元素："+locator.getLocalorName());
+        }
+    }
+    /**
+     * 暂停线程
+     * */
+    public void sleep(int i){
+        try {
+            Thread.sleep(i*1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
