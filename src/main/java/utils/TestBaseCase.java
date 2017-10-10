@@ -23,14 +23,13 @@ public class TestBaseCase {
     public  Logger log=LogManager.getLogger(this.getClass().getName());
 
     @BeforeSuite
-    @Parameters({"browserType","driverPath"})
+    @Parameters({"browser","driverpath"})
     public void initializationExtentReport(String browserType,String driverPath){
         /*initialization ExtentReport*/
         extentReports=new ExtentReports(reportLocation,true);
         extentReports
                 .addSystemInfo("Author","Andrew");
         manager.setupDriver(browserType,driverPath);
-        driver=manager.getDriver();
     }
     @BeforeTest
     @Parameters({"type"})
@@ -41,6 +40,7 @@ public class TestBaseCase {
         this.types=type;
         //System.setProperty("webdriver.chrome.driver","./src/main/resources/driver/Chromedriver.exe");
         //driver=new ChromeDriver();
+        driver=manager.getDriver();
         this.driver.manage().window().maximize();
     }
     @AfterTest
@@ -65,7 +65,7 @@ public class TestBaseCase {
     @AfterSuite
     public void closeExtentReport(){
         extentReports.flush();
-        extentReports.close();
+        //extentReports.close();
     }
     public static ExtentReports getextent() {
         return extentReports;
