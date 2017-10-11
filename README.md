@@ -21,4 +21,9 @@
     reportLocation是测试报告的地址，在这里用的根目录,reportLocation=ExetentReport.Html,true 表示每次都重写报告。
    
   - 使用@BeforeClass来定义需要打开的浏览器驱动，在这里用log4j输出到信息到控制台来查看测试进程
+  
+  
+  
+  -----
+  > 在进行并发操作时，线程之间数据跑串！！！
  
